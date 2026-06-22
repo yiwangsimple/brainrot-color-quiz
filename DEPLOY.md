@@ -12,11 +12,10 @@ This is a static site. There is no build step.
    - `index.html`
    - `robots.txt`
    - `sitemap.xml`
-3. Add verification and analytics snippets to `index.html` when those accounts are ready:
+3. GA4 is already configured with measurement ID `G-2W7CWEFM0E`. Add verification snippets to `index.html` when those accounts are ready:
    - Google Search Console
    - Bing Webmaster Tools
    - Yandex Webmaster
-   - GA4 measurement ID
 4. Confirm the homepage, `/robots.txt`, `/sitemap.xml`, `/favicon.svg`, `/icon-192.png`, `/icon-512.png`, `/og-image.svg`, and `/og-image.png` are reachable after deployment.
 5. Confirm `README.md`, `DEPLOY.md`, `.git`, and local notes are not publicly reachable.
 
