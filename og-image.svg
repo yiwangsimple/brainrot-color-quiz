@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f8fa"/>
+  <rect x="76" y="70" width="1048" height="490" rx="24" fill="#ffffff" stroke="#d9e0e7" stroke-width="4"/>
+  <rect x="130" y="130" width="150" height="150" rx="20" fill="#00a68a"/>
+  <rect x="300" y="130" width="150" height="150" rx="20" fill="#ef6351"/>
+  <rect x="130" y="300" width="150" height="150" rx="20" fill="#f4b942"/>
+  <rect x="300" y="300" width="150" height="150" rx="20" fill="#2878d8"/>
+  <text x="510" y="240" font-family="Arial, sans-serif" font-size="70" font-weight="800" fill="#18212f">Brainrot Color Quiz</text>
+  <text x="514" y="320" font-family="Arial, sans-serif" font-size="34" fill="#5e6a78">Daily meme color memory game</text>
+  <text x="514" y="386" font-family="Arial, sans-serif" font-size="28" fill="#18212f">Guess colors. Build streaks. Share today's score.</text>
+</svg>

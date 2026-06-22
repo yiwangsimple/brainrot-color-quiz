@@ -1,0 +1,16 @@
+{
+  "name": "Brainrot Color Quiz",
+  "short_name": "Color Quiz",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f7f8fa",
+  "theme_color": "#18212f",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

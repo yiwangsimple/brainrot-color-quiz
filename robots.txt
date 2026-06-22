@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yiwangsimple.github.io/brainrot-color-quiz/sitemap.xml
