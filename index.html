@@ -72,10 +72,10 @@
           },
           {
             "@type": "Question",
-            "name": "How is UGC kept away from the SEO main text?",
+            "name": "How does sharing work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The board and wall are local interactive areas. The main document keeps a stable topic around brainrot color quiz, meme color memory, and daily color game intent."
+              "text": "After finishing ten rounds, players can copy a short score line and post it wherever they talk about games."
             }
           }
         ]
@@ -85,44 +85,59 @@
   <body>
     <header class="site-header">
       <a class="brand" href="#play" aria-label="Brainrot Color Quiz home">
-        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
         <span>Brainrot Color Quiz</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
         <a href="#play">Play</a>
         <a href="#daily-board">Daily Board</a>
         <a href="#faq">FAQ</a>
+        <span class="day-pill" id="dailyPill">Daily Pack</span>
       </nav>
     </header>
 
     <main>
       <section class="play-surface" id="play">
-        <div class="intro-copy">
-          <p class="eyebrow">Daily meme color memory game</p>
-          <h1>Brainrot Color Quiz</h1>
-          <p class="lede">Match each fictional prompt to its signature color, build a streak, and share today's score.</p>
-        </div>
+        <div class="hero-grid">
+          <aside class="intro-rail" aria-label="Game intro">
+            <div class="intro-top">
+              <p class="eyebrow">Daily meme color memory game</p>
+              <h1 aria-label="Brainrot Color Quiz"><span>Brain</span><span>Rot</span><span>Color</span><span>Quiz</span></h1>
+              <p class="lede">Match the fictional prompt to its signature color. Ten rounds, one local board, one score built for a screenshot.</p>
+            </div>
+            <div class="quick-rules" aria-label="How the quiz works">
+              <div><b>01</b><span>Read the prompt before the colors trick you.</span></div>
+              <div><b>02</b><span>Tap the color that feels like the character.</span></div>
+              <div><b>03</b><span>Save the run and copy a share line.</span></div>
+            </div>
+            <div class="challenge-strip" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </aside>
 
-        <div class="tool-layout">
           <section class="game-panel" aria-label="Brainrot Color Quiz game">
             <div class="game-topline">
-              <div>
+              <div class="metric">
                 <span class="small-label">Round</span>
                 <strong id="roundText">1/10</strong>
               </div>
-              <div>
+              <div class="metric">
                 <span class="small-label">Score</span>
                 <strong id="scoreText">0</strong>
               </div>
-              <div>
+              <div class="metric">
                 <span class="small-label">Streak</span>
                 <strong id="streakText">0</strong>
               </div>
+              <div class="metric">
+                <span class="small-label">Pack</span>
+                <strong id="packText">Today</strong>
+              </div>
             </div>
 
-            <div class="prompt-zone">
+            <div class="prompt-stage">
               <div class="memory-token" id="memoryToken" aria-hidden="true">
-                <span></span>
+                <div class="token-label" id="tokenLabel">Color signal</div>
               </div>
               <div class="prompt-copy">
                 <p class="small-label">Today's prompt</p>
@@ -133,44 +148,52 @@
 
             <div class="swatch-grid" id="swatchGrid" aria-label="Color choices"></div>
 
-            <div class="feedback-row" aria-live="polite">
-              <p id="feedbackText">Pick the color that fits the prompt.</p>
-              <button class="secondary-button" id="nextButton" type="button" hidden>Next</button>
+            <div class="game-footer" aria-live="polite">
+              <div class="feedback-copy">
+                <strong id="feedbackTitle">Pick fast, remember faster.</strong>
+                <p id="feedbackText">Choose the color that fits the prompt.</p>
+              </div>
+              <button class="primary-button" id="nextButton" type="button" hidden>Next</button>
             </div>
           </section>
 
           <aside class="side-panel" id="daily-board" data-ugc="local-only">
-            <div class="side-block">
+            <div class="panel-block">
               <p class="small-label">Today</p>
               <h2 id="dailyTitle">Daily Pack</h2>
               <p id="dailyMeta">10 prompts. Local scores only.</p>
             </div>
 
-            <div class="side-block result-block" id="resultBlock" hidden>
+            <div class="panel-block result-block" id="resultBlock" hidden>
               <p class="small-label">Result</p>
-              <h2 id="finalScore">0/10</h2>
+              <div class="result-score"><strong id="finalScore">0/10</strong><span>final run</span></div>
               <p id="resultNote">Finish the daily pack to save a score.</p>
               <div class="name-row">
                 <label for="playerName">Initials</label>
                 <input id="playerName" maxlength="10" autocomplete="nickname" value="You">
-                <button id="saveScoreButton" type="button">Save</button>
+                <button class="mini-button" id="saveScoreButton" type="button">Save</button>
               </div>
-              <button class="wide-button" id="shareButton" type="button">Copy Share Text</button>
+              <button class="secondary-button" id="shareButton" type="button">Copy Share Text</button>
+              <button class="ghost-button" id="restartButton" type="button">Replay Pack</button>
             </div>
 
-            <div class="side-block">
+            <div class="panel-block">
               <div class="block-heading">
-                <h2>Daily Board</h2>
+                <div>
+                  <p class="small-label">Local</p>
+                  <h2>Daily Board</h2>
+                </div>
                 <button class="text-button" id="resetBoardButton" type="button">Reset</button>
               </div>
               <ol class="leaderboard" id="leaderboardList"></ol>
             </div>
 
-            <div class="side-block">
-              <h2>Score Wall</h2>
+            <div class="panel-block">
+              <p class="small-label">Score wall</p>
+              <h2>Drop a line</h2>
               <div class="wall-form">
                 <input id="wallInput" maxlength="42" placeholder="Short victory note">
-                <button id="wallButton" type="button">Post</button>
+                <button class="mini-button" id="wallButton" type="button">Post</button>
               </div>
               <ul class="wall-list" id="wallList"></ul>
             </div>
@@ -178,46 +201,55 @@
         </div>
       </section>
 
-      <section class="content-band" aria-labelledby="why-title">
-        <div class="content-grid">
-          <article>
-            <p class="eyebrow">Search intent</p>
-            <h2 id="why-title">A fast game for color-memory searches</h2>
-            <p>Brainrot Color Quiz targets players who want a quick meme color quiz, not a static palette page. The first screen is the game, the page title says exactly what it does, and the visible copy stays focused on color memory.</p>
+      <section class="info-band" aria-labelledby="why-title">
+        <div class="info-grid">
+          <article class="info-card">
+            <div>
+              <p class="eyebrow">Search intent</p>
+              <h2 id="why-title">The game starts before the page sells.</h2>
+            </div>
+            <p>Players looking for a brainrot color quiz land directly on the quiz, with the daily loop, color memory, and shareable score visible in the first screen.</p>
           </article>
-          <article>
-            <p class="eyebrow">Daily play</p>
-            <h2>Fresh fictional prompts every day</h2>
-            <p>Each daily pack mixes color names, visual clues, and quick choices so returning players can chase a better streak without learning a complicated rule set.</p>
+          <article class="info-card">
+            <div>
+              <p class="eyebrow">Daily play</p>
+              <h2>Fictional prompts keep the pack fast and safe.</h2>
+            </div>
+            <p>The prompt bank uses original arcade-style characters, color clues, and abstract visuals instead of protected character art.</p>
           </article>
-          <article>
-            <p class="eyebrow">Replay loop</p>
-            <h2>Share a score and come back tomorrow</h2>
-            <p>The local board, score wall, and daily reset give the game a simple reason to replay while keeping noisy player text away from the main SEO copy.</p>
+          <article class="info-card">
+            <div>
+              <p class="eyebrow">Replay loop</p>
+              <h2>Local board, copyable result, quick reset.</h2>
+            </div>
+            <p>The board and score wall create a replay habit while keeping player text separate from the stable SEO copy.</p>
           </article>
         </div>
-      </section>
 
-      <section class="faq-section" id="faq">
-        <p class="eyebrow">FAQ</p>
-        <h2>Brainrot Color Quiz questions</h2>
-        <details>
-          <summary>What is Brainrot Color Quiz?</summary>
-          <p>It is a daily color memory game where fictional meme-style prompts are matched with signature colors.</p>
-        </details>
-        <details>
-          <summary>Why use fictional prompts?</summary>
-          <p>Fictional prompts make the MVP safe to test without copying protected character art or depending on fragile image assets.</p>
-        </details>
-        <details>
-          <summary>How is UGC kept away from the SEO main text?</summary>
-          <p>The board and wall are local interactive areas. The main document keeps a stable topic around brainrot color quiz, meme color memory, and daily color game intent.</p>
-        </details>
+        <section class="faq-section" id="faq">
+          <p class="eyebrow">FAQ</p>
+          <h2>Brainrot Color Quiz questions</h2>
+          <details>
+            <summary>What is Brainrot Color Quiz?</summary>
+            <p>It is a daily color memory game where fictional meme-style prompts are matched with signature colors.</p>
+          </details>
+          <details>
+            <summary>Why use fictional prompts?</summary>
+            <p>Fictional prompts make the game safe to test without copying protected character art or depending on fragile image assets.</p>
+          </details>
+          <details>
+            <summary>How does sharing work?</summary>
+            <p>After finishing ten rounds, players can copy a short score line and post it wherever they talk about games.</p>
+          </details>
+        </section>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Brainrot Color Quiz refreshes daily with fictional color-memory prompts.</p>
+      <div class="footer-inner">
+        <span class="ticker">Brainrot Color Quiz refreshes daily</span>
+        <span>Guess colors. Build streaks. Share today's score.</span>
+      </div>
     </footer>
 
     <script src="app.js" defer></script>

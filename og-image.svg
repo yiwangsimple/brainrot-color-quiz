@@ -1,11 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#f7f8fa"/>
-  <rect x="76" y="70" width="1048" height="490" rx="24" fill="#ffffff" stroke="#d9e0e7" stroke-width="4"/>
-  <rect x="130" y="130" width="150" height="150" rx="20" fill="#00a68a"/>
-  <rect x="300" y="130" width="150" height="150" rx="20" fill="#ef6351"/>
-  <rect x="130" y="300" width="150" height="150" rx="20" fill="#f4b942"/>
-  <rect x="300" y="300" width="150" height="150" rx="20" fill="#2878d8"/>
-  <text x="510" y="240" font-family="Arial, sans-serif" font-size="70" font-weight="800" fill="#18212f">Brainrot Color Quiz</text>
-  <text x="514" y="320" font-family="Arial, sans-serif" font-size="34" fill="#5e6a78">Daily meme color memory game</text>
-  <text x="514" y="386" font-family="Arial, sans-serif" font-size="28" fill="#18212f">Guess colors. Build streaks. Share today's score.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Brainrot Color Quiz social preview">
+  <defs>
+    <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse">
+      <path d="M72 0H0V72" fill="none" stroke="#151511" stroke-opacity="0.12" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#f7f7f2"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="48" y="48" width="1104" height="534" fill="#fffef8" stroke="#151511" stroke-width="4"/>
+  <rect x="48" y="48" width="1104" height="72" fill="#fffef8" stroke="#151511" stroke-width="4"/>
+  <rect x="84" y="72" width="38" height="38" fill="#fffef8" stroke="#151511" stroke-width="3"/>
+  <circle cx="98" cy="86" r="5" fill="#40c7f4"/>
+  <circle cx="114" cy="86" r="5" fill="#b4f73b"/>
+  <circle cx="98" cy="102" r="5" fill="#ef3f2f"/>
+  <circle cx="114" cy="102" r="5" fill="#ffd64f"/>
+  <text x="142" y="99" font-family="Menlo, monospace" font-size="24" font-weight="900" fill="#151511" letter-spacing="1">BRAINROT COLOR QUIZ</text>
+  <rect x="890" y="48" width="262" height="72" fill="#b4f73b" stroke="#151511" stroke-width="4"/>
+  <text x="924" y="94" font-family="Menlo, monospace" font-size="22" font-weight="900" fill="#151511">DAILY PACK</text>
+
+  <rect x="84" y="160" width="310" height="290" fill="#fffef8" stroke="#151511" stroke-width="4"/>
+  <rect x="108" y="184" width="210" height="42" fill="#ef3f2f" stroke="#151511" stroke-width="3"/>
+  <text x="126" y="212" font-family="Menlo, monospace" font-size="18" font-weight="900" fill="#ffffff">COLOR MEMORY</text>
+  <text x="108" y="318" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="900" fill="#151511">BRAIN</text>
+  <text x="108" y="392" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="900" fill="#151511">ROT</text>
+
+  <rect x="420" y="160" width="418" height="290" fill="#fffef8" stroke="#151511" stroke-width="4"/>
+  <rect x="420" y="160" width="418" height="70" fill="#f4ffe3" stroke="#151511" stroke-width="4"/>
+  <circle cx="458" cy="195" r="11" fill="#ef3f2f" stroke="#151511" stroke-width="3"/>
+  <text x="482" y="204" font-family="Menlo, monospace" font-size="24" font-weight="900" fill="#151511">10 ROUNDS</text>
+  <circle cx="628" cy="333" r="82" fill="#ffd64f" stroke="#151511" stroke-width="4"/>
+  <rect x="600" y="434" width="58" height="10" fill="#151511"/>
+
+  <rect x="864" y="160" width="252" height="290" fill="#fffef8" stroke="#151511" stroke-width="4"/>
+  <rect x="896" y="196" width="72" height="72" fill="#ffd64f" stroke="#151511" stroke-width="4"/>
+  <rect x="988" y="196" width="72" height="72" fill="#ef3f2f" stroke="#151511" stroke-width="4"/>
+  <rect x="896" y="288" width="72" height="72" fill="#25283d" stroke="#151511" stroke-width="4"/>
+  <rect x="988" y="288" width="72" height="72" fill="#43aa8b" stroke="#151511" stroke-width="4"/>
+  <text x="896" y="412" font-family="Menlo, monospace" font-size="22" font-weight="900" fill="#151511">GUESS COLORS</text>
+
+  <rect x="84" y="480" width="1032" height="58" fill="#151511"/>
+  <text x="112" y="518" font-family="Menlo, monospace" font-size="24" font-weight="900" fill="#fffef8">BUILD STREAKS. COPY A SCORE. COME BACK TOMORROW.</text>
 </svg>

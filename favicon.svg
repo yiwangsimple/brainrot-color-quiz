@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Brainrot Color Quiz icon">
-  <rect width="64" height="64" rx="12" fill="#18212f"/>
-  <path d="M10 10h20v20H10z" fill="#00a68a"/>
-  <path d="M34 10h20v20H34z" fill="#ef6351"/>
-  <path d="M10 34h20v20H10z" fill="#f4b942"/>
-  <path d="M34 34h20v20H34z" fill="#2878d8"/>
+  <rect x="5" y="5" width="54" height="54" fill="#fffef8" stroke="#151511" stroke-width="4"/>
+  <circle cx="24" cy="24" r="7" fill="#40c7f4"/>
+  <circle cx="40" cy="24" r="7" fill="#b4f73b"/>
+  <circle cx="24" cy="40" r="7" fill="#ef3f2f"/>
+  <circle cx="40" cy="40" r="7" fill="#ffd64f"/>
 </svg>

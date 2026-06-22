@@ -104,13 +104,17 @@ const promptBank = [
 ];
 
 const elements = {
+  dailyPill: document.querySelector("#dailyPill"),
   roundText: document.querySelector("#roundText"),
   scoreText: document.querySelector("#scoreText"),
   streakText: document.querySelector("#streakText"),
+  packText: document.querySelector("#packText"),
   memoryToken: document.querySelector("#memoryToken"),
+  tokenLabel: document.querySelector("#tokenLabel"),
   promptName: document.querySelector("#promptName"),
   promptClue: document.querySelector("#promptClue"),
   swatchGrid: document.querySelector("#swatchGrid"),
+  feedbackTitle: document.querySelector("#feedbackTitle"),
   feedbackText: document.querySelector("#feedbackText"),
   nextButton: document.querySelector("#nextButton"),
   dailyTitle: document.querySelector("#dailyTitle"),
@@ -121,6 +125,7 @@ const elements = {
   playerName: document.querySelector("#playerName"),
   saveScoreButton: document.querySelector("#saveScoreButton"),
   shareButton: document.querySelector("#shareButton"),
+  restartButton: document.querySelector("#restartButton"),
   resetBoardButton: document.querySelector("#resetBoardButton"),
   leaderboardList: document.querySelector("#leaderboardList"),
   wallInput: document.querySelector("#wallInput"),
@@ -210,11 +215,14 @@ function renderGame() {
   elements.roundText.textContent = `${roundNumber}/${DAILY_SIZE}`;
   elements.scoreText.textContent = state.score;
   elements.streakText.textContent = state.streak;
+  elements.packText.textContent = todayKey.slice(5);
   elements.promptName.textContent = prompt.name;
   elements.promptClue.textContent = prompt.clue;
-  elements.feedbackText.textContent = "Pick the color that fits the prompt.";
+  elements.feedbackTitle.textContent = "Pick fast, remember faster.";
+  elements.feedbackText.textContent = "Choose the color that fits the prompt.";
   elements.nextButton.hidden = true;
   elements.memoryToken.style.setProperty("--answer", prompt.answer);
+  elements.tokenLabel.textContent = `Signal ${roundNumber}`;
 
   elements.swatchGrid.replaceChildren(
     ...prompt.options.map((color) => {
@@ -222,10 +230,14 @@ function renderGame() {
       button.className = "swatch-button";
       button.type = "button";
       button.dataset.color = color;
+      button.style.setProperty("--chip", color);
       button.setAttribute("aria-label", `Choose ${getColorName(prompt, color)}`);
       button.innerHTML = `
-        <span class="swatch-chip" style="background:${color}"></span>
-        <span class="swatch-name">${getColorName(prompt, color)}</span>
+        <span class="swatch-chip" aria-hidden="true"></span>
+        <span>
+          <span class="swatch-name">${getColorName(prompt, color)}</span>
+          <span class="swatch-code">${color}</span>
+        </span>
       `;
       button.addEventListener("click", () => handleAnswer(button, prompt));
       return button;
@@ -299,10 +311,12 @@ function handleAnswer(button, prompt) {
   if (correct) {
     state.score += 1;
     state.streak += 1;
-    elements.feedbackText.textContent = `Correct: ${prompt.colorName}.`;
+    elements.feedbackTitle.textContent = "Correct signal.";
+    elements.feedbackText.textContent = `${prompt.colorName} locks the streak.`;
   } else {
     state.streak = 0;
-    elements.feedbackText.textContent = `It was ${prompt.colorName}.`;
+    elements.feedbackTitle.textContent = "Color mismatch.";
+    elements.feedbackText.textContent = `The prompt wanted ${prompt.colorName}.`;
   }
 
   elements.scoreText.textContent = state.score;
@@ -334,15 +348,16 @@ function finishGame() {
   elements.resultBlock.hidden = false;
   elements.saveScoreButton.disabled = false;
   elements.saveScoreButton.textContent = "Save";
-  elements.feedbackText.textContent = "Daily pack complete. Save or share the score.";
+  elements.feedbackTitle.textContent = "Daily pack complete.";
+  elements.feedbackText.textContent = "Save the run or copy a share line.";
   elements.nextButton.hidden = true;
 }
 
 function getResultNote(score) {
-  if (score >= 9) return "Legend run. This score is share-worthy.";
-  if (score >= 7) return "Strong memory. A few colors tried to trick you.";
+  if (score >= 9) return "Legend run. This score belongs in the group chat.";
+  if (score >= 7) return "Strong memory. A few colors tried to bait you.";
   if (score >= 5) return "Solid run. Tomorrow's pack resets the board.";
-  return "Warm-up score. The daily board is still open.";
+  return "Warm-up score. The board is still open.";
 }
 
 function saveScore() {
@@ -369,13 +384,31 @@ function renderLeaderboard() {
   const store = getTodayStore();
   const scores = store[todayKey].scores;
   if (!scores.length) {
-    elements.leaderboardList.innerHTML = "<li>No local scores yet</li>";
+    const item = document.createElement("li");
+    const rank = document.createElement("span");
+    const label = document.createElement("span");
+    const score = document.createElement("span");
+    rank.className = "rank-badge";
+    score.className = "score-badge";
+    rank.textContent = "--";
+    label.textContent = "No local scores yet";
+    score.textContent = "0/10";
+    item.replaceChildren(rank, label, score);
+    elements.leaderboardList.replaceChildren(item);
     return;
   }
   elements.leaderboardList.replaceChildren(
-    ...scores.map((entry) => {
+    ...scores.map((entry, index) => {
       const item = document.createElement("li");
-      item.textContent = `${entry.name}: ${entry.score}/${entry.total}`;
+      const rank = document.createElement("span");
+      const name = document.createElement("span");
+      const score = document.createElement("span");
+      rank.className = "rank-badge";
+      score.className = "score-badge";
+      rank.textContent = String(index + 1).padStart(2, "0");
+      name.textContent = entry.name;
+      score.textContent = `${entry.score}/${entry.total}`;
+      item.replaceChildren(rank, name, score);
       return item;
     })
   );
@@ -407,7 +440,7 @@ function renderWall() {
   const store = getTodayStore();
   const notes = store[todayKey].wall;
   if (!notes.length) {
-    elements.wallList.innerHTML = "<li>Clean board, fresh run</li>";
+    elements.wallList.innerHTML = "<li>Clean board, fresh run.</li>";
     return;
   }
   elements.wallList.replaceChildren(
@@ -427,12 +460,26 @@ function resetBoard() {
   renderWall();
 }
 
+function restartGame() {
+  state.round = 0;
+  state.score = 0;
+  state.streak = 0;
+  state.answered = false;
+  state.complete = false;
+  state.lastResult = null;
+  elements.resultBlock.hidden = true;
+  renderGame();
+}
+
 function boot() {
-  elements.dailyTitle.textContent = `Daily Pack ${todayKey}`;
+  const readableDate = todayKey.slice(5).replace("-", "/");
+  elements.dailyPill.textContent = `Pack ${readableDate}`;
+  elements.dailyTitle.textContent = `Daily Pack ${readableDate}`;
   elements.dailyMeta.textContent = `${DAILY_SIZE} prompts. New local board each day.`;
   elements.nextButton.addEventListener("click", nextRound);
   elements.saveScoreButton.addEventListener("click", saveScore);
   elements.shareButton.addEventListener("click", shareResult);
+  elements.restartButton.addEventListener("click", restartGame);
   elements.resetBoardButton.addEventListener("click", resetBoard);
   elements.wallButton.addEventListener("click", postWallNote);
   elements.wallInput.addEventListener("keydown", (event) => {
