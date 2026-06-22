@@ -3,6 +3,10 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+/404.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=300, must-revalidate
+
 /favicon.svg
   Cache-Control: public, max-age=604800
 

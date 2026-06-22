@@ -14,6 +14,7 @@ The leaderboard and wall are local-only interactive elements. They are intention
 Publishable files:
 
 - `.nojekyll`
+- `404.html`
 - `_headers`
 - `_redirects`
 - `app.js`

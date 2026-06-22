@@ -31,6 +31,7 @@ This is a static site. There is no build step.
 Use only these files in a manual upload or clean deploy directory:
 
 - `.nojekyll`
+- `404.html`
 - `_headers`
 - `_redirects`
 - `app.js`
