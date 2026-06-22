@@ -17,15 +17,35 @@ This is a static site. There is no build step.
    - Bing Webmaster Tools
    - Yandex Webmaster
    - GA4 measurement ID
-4. Confirm the homepage, `/robots.txt`, `/sitemap.xml`, `/favicon.svg`, and `/og-image.svg` are reachable after deployment.
+4. Confirm the homepage, `/robots.txt`, `/sitemap.xml`, `/favicon.svg`, `/icon-192.png`, `/icon-512.png`, `/og-image.svg`, and `/og-image.png` are reachable after deployment.
+5. Confirm `README.md`, `DEPLOY.md`, `.git`, and local notes are not publicly reachable.
 
 ## Recommended path: Cloudflare Pages
 
 1. Create a new Cloudflare Pages project named `brainrot-color-quiz`.
-2. Upload this folder directly or connect a GitHub repo.
+2. Upload a clean publish directory or connect a GitHub repo.
 3. Build command: leave empty.
-4. Output directory: `/` if uploading this folder, or `brainrot-color-quiz` if deploying from the workspace root.
+4. Output directory: `/` for a clean upload directory, or the project root if Cloudflare builds from this repo.
 5. After the first deploy, update canonical URLs to the final custom domain, then redeploy.
+
+Use only these files in a manual upload or clean deploy directory:
+
+- `.nojekyll`
+- `_headers`
+- `_redirects`
+- `app.js`
+- `favicon.svg`
+- `icon-192.png`
+- `icon-512.png`
+- `index.html`
+- `og-image.png`
+- `og-image.svg`
+- `robots.txt`
+- `site.webmanifest`
+- `sitemap.xml`
+- `styles.css`
+
+Do not upload `README.md`, `DEPLOY.md`, `.git`, tokens, local screenshots, or unpublished notes.
 
 ## Backup path: GitHub Pages
 

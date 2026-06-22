@@ -6,14 +6,26 @@
 /favicon.svg
   Cache-Control: public, max-age=604800
 
+/icon-192.png
+  Cache-Control: public, max-age=604800
+
+/icon-512.png
+  Cache-Control: public, max-age=604800
+
 /og-image.svg
   Cache-Control: public, max-age=604800
 
-/styles.css
+/og-image.png
   Cache-Control: public, max-age=604800
 
+/styles.css
+  Cache-Control: public, max-age=300, must-revalidate
+
 /app.js
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=300, must-revalidate
+
+/site.webmanifest
+  Cache-Control: public, max-age=3600
 
 /sitemap.xml
   Cache-Control: public, max-age=300

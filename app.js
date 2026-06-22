@@ -257,7 +257,6 @@ function getColorName(prompt, color) {
     "#2ec4b6": "Aqua Mint",
     "#3a0ca3": "Deep Violet",
     "#ffbe0b": "Sun Coin",
-    "#43aa8b": "Fresh Green",
     "#ff8500": "Orange Burst",
     "#277da1": "Steel Blue",
     "#264653": "Deep Slate",
