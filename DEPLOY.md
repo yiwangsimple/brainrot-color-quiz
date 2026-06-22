@@ -8,11 +8,11 @@ This is a static site. There is no build step.
    - Cloudflare Pages preview: `https://brainrot-color-quiz.pages.dev/`
    - GitHub Pages: `https://yiwangsimple.github.io/brainrot-color-quiz/`
    - Custom domain: `https://brainrotcolorquiz.com/`
-2. Replace every `https://yiwangsimple.github.io/brainrot-color-quiz/` value in these files when moving to a custom domain:
+2. Replace every `https://brainrot-color-quiz.pages.dev/` value in these files when moving to a custom domain:
    - `index.html`
    - `robots.txt`
    - `sitemap.xml`
-3. Replace the commented verification placeholders in `index.html`:
+3. Add verification and analytics snippets to `index.html` when those accounts are ready:
    - Google Search Console
    - Bing Webmaster Tools
    - Yandex Webmaster
@@ -25,7 +25,7 @@ This is a static site. There is no build step.
 2. Upload this folder directly or connect a GitHub repo.
 3. Build command: leave empty.
 4. Output directory: `/` if uploading this folder, or `brainrot-color-quiz` if deploying from the workspace root.
-5. After the first deploy, update canonical URLs to the final Pages URL or custom domain, then redeploy.
+5. After the first deploy, update canonical URLs to the final custom domain, then redeploy.
 
 ## Backup path: GitHub Pages
 
