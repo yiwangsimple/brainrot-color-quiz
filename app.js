@@ -1,5 +1,6 @@
 const DAILY_SIZE = 10;
 const STORAGE_KEY = "brainrot-color-quiz";
+let memoryStore = {};
 
 const promptBank = [
   {
@@ -168,14 +169,21 @@ function buildDailyPack(seedText) {
 
 function getStore() {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    const rawStore = localStorage.getItem(STORAGE_KEY);
+    memoryStore = rawStore ? JSON.parse(rawStore) || {} : memoryStore;
+    return memoryStore;
   } catch {
-    return {};
+    return memoryStore;
   }
 }
 
 function setStore(store) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  memoryStore = store;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  } catch {
+    // Keep the in-memory board usable when storage is blocked or full.
+  }
 }
 
 function getTodayStore() {
@@ -318,11 +326,14 @@ function finishGame() {
   state.lastResult = {
     score: state.score,
     total: DAILY_SIZE,
-    date: todayKey
+    date: todayKey,
+    saved: false
   };
   elements.finalScore.textContent = `${state.score}/${DAILY_SIZE}`;
   elements.resultNote.textContent = getResultNote(state.score);
   elements.resultBlock.hidden = false;
+  elements.saveScoreButton.disabled = false;
+  elements.saveScoreButton.textContent = "Save";
   elements.feedbackText.textContent = "Daily pack complete. Save or share the score.";
   elements.nextButton.hidden = true;
 }
@@ -335,7 +346,7 @@ function getResultNote(score) {
 }
 
 function saveScore() {
-  if (!state.lastResult) return;
+  if (!state.lastResult || state.lastResult.saved) return;
   const store = getTodayStore();
   const name = sanitizeText(elements.playerName.value, "Player").slice(0, 10);
   store[todayKey].scores.push({
@@ -347,7 +358,10 @@ function saveScore() {
     .sort((a, b) => b.score - a.score)
     .slice(0, 6);
   setStore(store);
+  state.lastResult.saved = true;
   renderLeaderboard();
+  elements.saveScoreButton.disabled = true;
+  elements.saveScoreButton.textContent = "Saved";
   elements.resultNote.textContent = "Saved to the local daily board.";
 }
 

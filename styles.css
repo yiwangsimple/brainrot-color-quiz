@@ -339,6 +339,14 @@ h1 {
   padding: 10px 14px;
 }
 
+.secondary-button:disabled,
+.wide-button:disabled,
+.name-row button:disabled,
+.wall-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
 .wide-button {
   width: 100%;
   min-height: 44px;
